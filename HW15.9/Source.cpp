@@ -17,31 +17,31 @@ HashTable::~HashTable()
 
 int HashTable::hash_func(const UserName us_name)
 {
-    int sum = 0, i = 0;    // вычисляем индекс
+    int sum = 0, i = 0;    // РІС‹С‡РёСЃР»СЏРµРј РёРЅРґРµРєСЃ
     for (; i < strlen(us_name); i++)
     {
         sum += us_name[i];
     }
     double A = 0.618033;
 
-    // проба
+    // РїСЂРѕР±Р°
     return mem_size * fmod(sum * A, 1);
 }
 
 void HashTable::add(const UserName us_name, const UserPassword us_pass)
 {
-    int index = -1, i = 0;    // берем пробы по всем i от 0 до размера массива
+    int index = -1, i = 0;    // Р±РµСЂРµРј РїСЂРѕР±С‹ РїРѕ РІСЃРµРј i РѕС‚ 0 РґРѕ СЂР°Р·РјРµСЂР° РјР°СЃСЃРёРІР°
     for (;i < mem_size; i++)
     {
         index = hash_func(us_name);
-        if (array[index].status != enPairStatus::engaged)            // найдена пустая ячейка, занимаем ее
+        if (array[index].status != enPairStatus::engaged)            // РЅР°Р№РґРµРЅР° РїСѓСЃС‚Р°СЏ СЏС‡РµР№РєР°, Р·Р°РЅРёРјР°РµРј РµРµ
         {
             break;
         }
     }
     if (i >= mem_size)
     {
-        resize(); // не нашли места делаем ресайз и снова добавляем
+        resize(); // РЅРµ РЅР°С€Р»Рё РјРµСЃС‚Р° РґРµР»Р°РµРј СЂРµСЃР°Р№Р· Рё СЃРЅРѕРІР° РґРѕР±Р°РІР»СЏРµРј
         add(us_name, us_pass);
     }
     else
@@ -75,7 +75,7 @@ char HashTable::find(const UserName us_name)
 void HashTable::del(const UserName us_name)
 {
     cout << "del " << us_name << endl;
-    int index = -1, i = 0;                    // берем пробы по всем i от 0 до размера массива
+    int index = -1, i = 0;                    // Р±РµСЂРµРј РїСЂРѕР±С‹ РїРѕ РІСЃРµРј i РѕС‚ 0 РґРѕ СЂР°Р·РјРµСЂР° РјР°СЃСЃРёРІР°
     for (;i < mem_size; i++)
     {
         index = hash_func(us_name);
@@ -107,17 +107,17 @@ void HashTable::print()
 
 void HashTable::resize()
 {
-    Pair* oldArray = array; // запоминаем старый массив
+    Pair* oldArray = array; // Р·Р°РїРѕРјРёРЅР°РµРј СЃС‚Р°СЂС‹Р№ РјР°СЃСЃРёРІ
     int oldSize = mem_size;
-    mem_size *= 2;  // увеличиваем размер в два раза  
-    count = 0; // обнуляем количество элементов
-    array = new Pair[mem_size]; // выделяем новую память
+    mem_size *= 2;  // СѓРІРµР»РёС‡РёРІР°РµРј СЂР°Р·РјРµСЂ РІ РґРІР° СЂР°Р·Р°   
+    count = 0; // РѕР±РЅСѓР»СЏРµРј РєРѕР»РёС‡РµСЃС‚РІРѕ СЌР»РµРјРµРЅС‚РѕРІ
+    array = new Pair[mem_size]; // РІС‹РґРµР»СЏРµРј РЅРѕРІСѓСЋ РїР°РјСЏС‚СЊ
     for (int i = 0; i < oldSize; i++)
     {
         Pair current = oldArray[i];
         if (current.status == enPairStatus::engaged)
             add(current.user_name, current.user_pass);
     }
-    // чистим за собой
+    // С‡РёСЃС‚РёРј Р·Р° СЃРѕР±РѕР№
     delete[] oldArray;
 }
