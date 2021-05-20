@@ -17,6 +17,5 @@ int main()
 	a.print();
 	a.add("Second", "Pas2");
 	a.print();
-	a.find("nine");
 	return 0;
 }
