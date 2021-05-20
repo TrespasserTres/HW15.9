@@ -2,12 +2,12 @@
 #include <string>
 using namespace std;
 
-#define NAMELENGTH 10  // Зафиксируем длину имени
+#define NAMELENGTH 10  // Р—Р°С„РёРєСЃРёСЂСѓРµРј РґР»РёРЅСѓ РёРјРµРЅРё
 
-typedef char UserName[NAMELENGTH]; // тип имя фрукта
-typedef char UserPassword[NAMELENGTH]; // тип имя фрукта
+typedef char UserName[NAMELENGTH]; // С‚РёРї РёРјСЏ
+typedef char UserPassword[NAMELENGTH]; // РїР°СЂРѕР»СЊ
 
-class HashTable { // хеш-таблица
+class HashTable { // С…РµС€-С‚Р°Р±Р»РёС†Р°
 public:
 
     HashTable();
@@ -22,36 +22,36 @@ private:
 
     enum class enPairStatus
     {
-        free, // свободен
-        engaged, //занят
-        deleted //удален
+        free, // СЃРІРѕР±РѕРґРµРЅ
+        engaged, //Р·Р°РЅСЏС‚
+        deleted //СѓРґР°Р»РµРЅ
     };
 
-    struct Pair // пара ключ-значение
+    struct Pair // РїР°СЂР° РєР»СЋС‡-Р·РЅР°С‡РµРЅРёРµ
     {
-        Pair() : // конструктор по умолчанию
+        Pair() : // РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ РїРѕ СѓРјРѕР»С‡Р°РЅРёСЋ
             user_name(""),
             user_pass(""),
             status(enPairStatus::free)
         {
 
         }
-        Pair(const UserName us_name, const UserPassword us_pass) : // конструктор копирования
+        Pair(const UserName us_name, const UserPassword us_pass) : // РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ РєРѕРїРёСЂРѕРІР°РЅРёСЏ
             status(enPairStatus::engaged)
         {
             strcpy_s(user_name, us_name);
             strcpy_s(user_pass, us_pass);
         }
-        Pair& operator = (const Pair& other) //  оператор присваивания
+        Pair& operator = (const Pair& other) //  РѕРїРµСЂР°С‚РѕСЂ РїСЂРёСЃРІР°РёРІР°РЅРёСЏ
         {
             strcpy_s(user_name, other.user_name);
             strcpy_s(user_pass, other.user_pass);
             status = other.status;
             return *this;
         }
-        UserName user_name; // имя фрукта (ключ)
-        UserPassword user_pass; // количество фрукта (значение)
-        enPairStatus status; // состояние ячейки
+        UserName user_name; // РёРјСЏ (РєР»СЋС‡)
+        UserPassword user_pass; // РїР°СЂРѕР»СЊ
+        enPairStatus status; // СЃРѕСЃС‚РѕСЏРЅРёРµ СЏС‡РµР№РєРё
     };
 
     int hash_func(const UserName us_name);
